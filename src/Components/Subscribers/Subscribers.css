@@ -1,0 +1,115 @@
+/* Root container for sidebar and main content */
+.app-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden; /* Prevents double scrolling */
+}
+
+/* Sidebar stays fixed */
+.sidebar {
+    width: 250px; /* Adjust width as needed */
+    height: 100vh; /* Full height */
+    position: fixed; /* Fixed in place */
+    top: 0;
+    left: 0;
+    background: #2c3e50; /* Adjust sidebar color */
+    color: white;
+    padding: 20px;
+    overflow-y: auto; /* Allow sidebar scrolling if needed */
+}
+
+/* Main content area */
+.subscribers-container {
+    flex-grow: 1; /* Take up remaining space */
+    margin-left: 250px; /* Same width as sidebar */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent scrolling on full container */
+    padding: 20px;
+    background: #f5f5f5; /* Background color */
+}
+
+/* Scrollable table area */
+.subscribers-table-container {
+    flex-grow: 1; /* Fills available space */
+    overflow-y: auto; /* Enables scrolling for table */
+    max-height: calc(100vh - 80px); /* Prevents exceeding screen height */
+    background: white;
+    border-radius: 8px;
+}
+
+/* Table Styling */
+.subscribers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Fixed table headers */
+.subscribers-table thead {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+}
+
+/* Table Borders */
+.subscribers-table th,
+.subscribers-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Space Between Rows */
+.subscribers-table tbody tr {
+    height: 50px;
+}
+
+/* Alternating Row Colors */
+.subscribers-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Bigger Checkbox */
+.checkbox-large {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Edit Icon */
+.edit-icon {
+    color: #007bff;
+    cursor: pointer;
+    float: right;
+}
+
+.edit-icon:hover {
+    color: #0056b3;
+}
+
+/* Header containing Subscribers text & Add Subscriber button */
+.subscribers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Add Subscriber Button */
+.add-subscriber-btn {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.add-subscriber-btn:hover {
+    background-color: darkorange;
+}
