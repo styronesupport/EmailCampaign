@@ -196,6 +196,36 @@ app.get("/api/get-groups-list", async (req, res) => {
 });
 
 
+// Endpoint to fetch subscribers of a specific group
+app.get("/api/get-subscribers/:groupId", async (req, res) => {
+  const { groupId } = req.params;
+  const url = `https://api.sender.net/v2/groups/${groupId}/subscribers`;
+
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    // Extract relevant data
+    const subscribers = response.data.data.map((subscriber) => ({
+      email: subscriber.email,
+      firstName: subscriber.firstname || "N/A",
+      lastName: subscriber.lastname || "N/A",
+      phone: subscriber.phone || "N/A",
+    }));
+
+    res.json({ subscribers });
+  } catch (error) {
+    console.error("Error fetching subscribers:", error.message);
+    res.status(500).json({ error: "Failed to fetch subscribers" });
+  }
+});
+
+
 // Update user
 app.put("/api/users/:id", (req, res) => {
   const { id } = req.params;

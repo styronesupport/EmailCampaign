@@ -1,0 +1,62 @@
+.group-details-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.group-id {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.add-subscriber {
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.delete-subscriber {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.subscribers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.subscribers-table th, .subscribers-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.subscribers-table th {
+    background-color: #f4f4f4;
+}
+
+.subscribers-table input[type="checkbox"] {
+    cursor: pointer;
+}

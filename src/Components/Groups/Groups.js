@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Groups.css";
 import GroupPopup from "./GroupPopup"; // Import popup component
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 
 const Groups = () => {
@@ -14,6 +16,12 @@ const Groups = () => {
   const openPopup = () => setPopupOpen(true);
   const closePopup = () => setPopupOpen(false);
 
+  const navigate = useNavigate();
+
+  //const groups = [
+   // { id: "epBDwm", name: "Group A" },
+   // { id: 2, name: "Group B" },
+  //];
 
   useEffect(() => {
     // Define an async function inside useEffect
@@ -38,6 +46,10 @@ const Groups = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading groups: {error.message}</div>;
+
+  const handleGroupClick = (groupId) => {
+    navigate(`/groups/${groupId}`);  // Navigate to GroupDetails with the groupId
+};
 
   return (
     <div className="groups-container">
@@ -69,7 +81,7 @@ const Groups = () => {
           <tbody>
             {/* Sample Row */}
             {groups.map((group) => (
-            <tr key={group.id}>
+            <tr key={group.id} onClick={() => handleGroupClick(group.id)} style={{ cursor: "pointer" }}>
               <td>{group.title}</td>
               <td>{group.active_subscribers}</td>
               <td>{group.recipient_count}</td>
