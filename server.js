@@ -5,11 +5,14 @@ const cors = require("cors");
 const axios = require("axios");
 const bodyParser = require("body-parser");
 const https = require("https");
+//const router = express.Router();
+const groupRoutes = require("./routes/GroupRoutes"); // if you save in a file
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(groupRoutes);
 app.use(bodyParser.json());
 const agent = new https.Agent({
   rejectUnauthorized: false, // ⚠️ Not for production! Only for localhost testing.
@@ -199,7 +202,15 @@ app.get("/api/get-groups-list", async (req, res) => {
 // Endpoint to fetch subscribers of a specific group
 app.get("/api/get-subscribers/:groupId", async (req, res) => {
   const { groupId } = req.params;
-  const url = `https://api.sender.net/v2/groups/${groupId}/subscribers`;
+  //const groupId = req.params.groupID;
+  console.log("Incoming groupID at the server endpoint:", req.params.groupId);
+  //const url = `https://api.sender.net/v2/groups/${groupId}/subscribers`;
+  
+  const url = `https://api.sender.net/v2/groups/${groupId}/subscribers?limit=1000`;
+  
+  
+  console.log("get subscribers end point....");
+ 
 
   try {
     const response = await axios.get(url, {
@@ -217,11 +228,45 @@ app.get("/api/get-subscribers/:groupId", async (req, res) => {
       lastName: subscriber.lastname || "N/A",
       phone: subscriber.phone || "N/A",
     }));
-
+    console.log("Sending to frontend:", subscribers.length);
     res.json({ subscribers });
   } catch (error) {
     console.error("Error fetching subscribers:", error.message);
     res.status(500).json({ error: "Failed to fetch subscribers" });
+  }
+});
+
+
+app.post("/api/add-newsubscriber/:groupId", async (req, res) => {
+  const { groupId } = req.params;
+  const { email, firstName, lastName, phone } = req.body;
+
+  try {
+    const response = await axios.post(
+      `https://api.sender.net/v2/subscribers`,
+      {
+        email,
+        groups: [groupId],
+        firstname: firstName,
+        lastname: lastName,
+        phone,       
+        fields: {"{$test_text}":"Documentation example","{$test_num}": 8},
+        trigger_automation: false,
+        
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+
+    res.status(200).json({ message: "Subscriber added successfully" });
+  } catch (error) {
+    console.error("Error adding subscriber:", error.message);
+    res.status(500).json({ error: "Failed to add subscriber" });
   }
 });
 

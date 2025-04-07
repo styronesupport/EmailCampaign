@@ -48,6 +48,7 @@ const Groups = () => {
   if (error) return <div>Error loading groups: {error.message}</div>;
 
   const handleGroupClick = (groupId) => {
+    console.log("inside handleGroupClick - Groups.js...");
     navigate(`/groups/${groupId}`);  // Navigate to GroupDetails with the groupId
 };
 

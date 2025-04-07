@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 function Sidebar() {
   const navigate = useNavigate(); // Hook for navigation
 
-  function GroupDetailsWrapper() {
+  function GroupDetails() {
     const { id } = useParams(); // Extracts the group ID from URL
     return <GroupDetails groupID={id} />;
   }
@@ -38,7 +38,7 @@ function App() {
             <Route path="/campaigns" element={<Campaigns />} />
             <Route path="/groups" element={<Groups />} />
             
-            <Route path="/groups/:id" element={<GroupDetailsWrapper />} />
+            <Route path="/groups/:id" element={<GroupDetails />} />
 
             <Route path="/subscribers" element={<Subscribers />} />
           </Routes>
