@@ -180,6 +180,65 @@ app.post("/api/send-campaign", async (req, res) => {
 });
 
 
+app.get("/api/campaigns", async (req, res) => {
+  try {
+    // 1. Fetch campaigns
+    const campaignsResponse = await axios.get(
+      "https://api.sender.net/v2/campaigns?limit=10&status=DRAFT",
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const campaigns = Array.isArray(campaignsResponse.data.data)
+      ? campaignsResponse.data.data
+      : [campaignsResponse.data.data];
+
+    // 2. Fetch groups
+    const groupsResponse = await axios.get(
+      "https://api.sender.net/v2/groups",
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const groupList = groupsResponse.data.data;
+
+    // 3. Build a lookup: groupID -> groupName
+    const groupMap = {};
+    groupList.forEach((group) => {
+      groupMap[group.id] = group.name;
+    });
+
+    // 4. Format campaigns and convert group IDs to names
+    const formatted = campaigns.map((c) => ({
+      campaign_id: c.id,
+      name: c.title || "Untitled",
+      groups: (c.campaign_groups || [])
+        .map((groupId) => groupMap[groupId] || groupId)
+        .join(", ") || "N/A",
+      status: {
+        delivered: c.recipient_count || 0,
+        opened: c.opens || 0,
+        clicked: c.clicks || 0,
+      },
+    }));
+
+    res.json(formatted);
+  } catch (err) {
+    console.error("Error fetching campaigns or groups:", err.message);
+    res.status(500).json({ error: "Failed to fetch campaigns" });
+  }
+});
+
+
+
 app.get("/api/get-groups-list", async (req, res) => { 
   try {
     const response = await axios.get("https://api.sender.net/v2/groups", {

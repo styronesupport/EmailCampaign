@@ -1,0 +1,27 @@
+.campaigns-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .campaigns-header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+ 
+  .new-campaign-button {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 999px; /* deeply curved */
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .new-campaign-button:hover {
+    background-color: darkorange;
+  }
+  

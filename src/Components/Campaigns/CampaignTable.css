@@ -1,0 +1,168 @@
+.campaign-table-container {
+    width: 100%;
+   
+  }
+  
+  .campaign-search-bar {
+    width: 80%;
+    max-width: 800px;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border-bottom: 2px solid #ccc; /* visually stronger bottom line */
+    border: 1px solid #ccc;
+  }
+
+  .campaign-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    
+  }
+  
+  .campaign-table th,
+  .campaign-table td {
+    padding: 15px;
+    border-bottom: 2px solid #ccc; /* visually stronger bottom line */
+    text-align: left;
+  }
+  
+
+  .campaign-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .campaign-square {
+    width: 40px;
+    height: 40px;
+    background-color: #c8c3c3;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+   .status-cell {
+    max-width: 300px; /* adjust as per your layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .status-cell .status-subcol {
+    display: flex;
+    flex-direction: row; /* Make them side-by-side */
+    justify-content: space-between; /* Optional: space them out evenly */
+    gap: 12px; /* space between Delivered / Opened / Clicked */
+    flex-wrap: wrap; /* allows wrapping if space is tight */
+  }
+  
+  .group-name-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+
+  .actions-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+  }
+  
+  .action-btn {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: rgb(103, 103, 194);
+  }
+
+  .action-btn:hover {
+    background-color: rgb(65, 117, 230);
+  }
+  
+  .dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background-color: #726d6d;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 5px;
+    z-index: 100;
+  }
+  
+  .dropdown-container:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dropdown-content button {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-box {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 400px;
+    max-width: 90%;
+  }
+  
+  .popup-message {
+    font-size: 16px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .popup-action-btn,
+  .popup-cancel-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .popup-action-btn:hover,
+  .popup-cancel-btn:hover {
+    background-color: #6c757d; /* grey on hover */
+  }

@@ -1,19 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from "react-router-dom";
+
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Groups from "./Components/Groups/Groups";
-import GroupDetails from "./Components/Groups/GroupDetails"; // Import GroupDetails component
+import GroupDetails from "./Components/Groups/GroupDetails";
 import Subscribers from "./Components/Subscribers/Subscribers";
 import Campaigns from "./Components/Campaigns/Campaigns";
+
+import { GroupProvider } from "./Context/GroupProvider"; // ✅ import the provider
+
 import "./App.css";
-import { useParams } from "react-router-dom";
 
 function Sidebar() {
-  const navigate = useNavigate(); // Hook for navigation
-
-  function GroupDetails() {
-    const { id } = useParams(); // Extracts the group ID from URL
-    return <GroupDetails groupID={id} />;
-  }
+  const navigate = useNavigate();
 
   return (
     <div className="sidebar">
@@ -25,30 +23,35 @@ function Sidebar() {
   );
 }
 
+// Separate wrapper for GroupDetails to use useParams inside Routes
+function GroupDetailsWrapper() {
+  const { id } = useParams();
+  return <GroupDetails groupID={id} />;
+}
+
 function App() {
   return (
-    <Router>
-      <div className="app-container">
-        <Sidebar /> {/* Sidebar remains constant across all screens */}
-
-        {/* Main Content Area */}
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/campaigns" element={<Campaigns />} />
-            <Route path="/groups" element={<Groups />} />
-            
-            <Route path="/groups/:id" element={<GroupDetails />} />
-
-            <Route path="/subscribers" element={<Subscribers />} />
-          </Routes>
+    <GroupProvider> {/* ✅ Wrap entire app inside GroupProvider */}
+      <Router>
+        <div className="app-container">
+          <Sidebar />
+          <div className="content">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/campaigns" element={<Campaigns />} />
+              <Route path="/groups" element={<Groups />} />
+              <Route path="/groups/:id" element={<GroupDetailsWrapper />} />
+              <Route path="/subscribers" element={<Subscribers />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </GroupProvider>
   );
 }
 
 export default App;
+
 
 
 /* {/* Campaign Popup }

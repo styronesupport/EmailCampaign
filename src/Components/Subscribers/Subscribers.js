@@ -5,7 +5,7 @@ import * as XLSX from "xlsx";
 //import Campaigns from "./Components/Campaigns";
 //import Groups from "./Components/Groups";
 //import Subscribers from "./Components/Subscribers";
-import CampaignPopup from "../Campaigns/CampaignPopup";
+import CampaignPopup from "../Campaigns/CampaignPopup.old";
 import { FaPen } from "react-icons/fa";
 
 //import { FaPen } from "react-icons/fa";

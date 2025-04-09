@@ -1,7 +1,7 @@
 // components/CampaignPopup.jsx
 import React, { useState, useEffect, useRef} from "react";
 import axios from "axios";
-import "./CampaignPopup.css"; // optional: for styling
+//import "./CampaignPopup.css"; // optional: for styling
 
 const CampaignPopup = ({ onClose }) => {
   const [activeTab, setActiveTab] = useState("compose");
